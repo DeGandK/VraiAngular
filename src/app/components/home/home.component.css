@@ -1,0 +1,9 @@
+.jumbotron {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+/* commentaire */
+.card {
+  margin-bottom: 1.5rem;
+}

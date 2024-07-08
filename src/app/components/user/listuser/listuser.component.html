@@ -1,0 +1,35 @@
+<div class="card border-primary">
+  <div class="card-body">
+    <h4 class="card-title">Liste des utilisateurs</h4>
+    <div>
+      <table class="table table-dark table-striped table-hover vw-75">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Photo de profil</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (users of liste; track $index) {
+          <tr>
+            <td>{{ users.username }}</td>
+            <td><img [src]="users.profilePicture" height="75px" /></td>
+            <button
+              (click)="deleteUser(users.id)"
+              class="btn btn-outline-danger btn-sm"
+            >
+              Supprimer
+            </button>
+            <button
+              (click)="selectUser(users.id)"
+              class="btn btn-outline-info btn-sm"
+            >
+              Afficher les détails
+            </button>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

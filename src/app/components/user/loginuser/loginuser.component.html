@@ -1,0 +1,128 @@
+<!-- Formulaire de connexion -->
+<form [formGroup]="fg" (ngSubmit)="login()" class="d-flex align-items-center">
+  <div class="form-group me-2">
+    <input
+      class="form-control-sm"
+      name="email"
+      id="email"
+      placeholder="Votre adresse email"
+      formControlName="email"
+      type="email"
+    />
+  </div>
+  <div class="form-group me-2">
+    <input
+      type="password"
+      class="form-control-sm"
+      name="password"
+      id="password"
+      placeholder="Votre mot de passe"
+      formControlName="password"
+    />
+  </div>
+  <button type="submit" class="btn btn-outline-primary">Connexion</button>
+
+  <!-- Bouton pour ouvrir le modal d'inscription -->
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+  >
+    Pas encore de compte?
+  </button>
+</form>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          Création de votre compte
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire d'inscription -->
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input
+              class="form-control"
+              name="username"
+              id="username"
+              placeholder="Nom d'utilisateur"
+              formControlName="username"
+              type="text"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input
+              class="form-control"
+              name="email"
+              id="register-email"
+              placeholder="Votre adresse email"
+              formControlName="email"
+              type="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="register-password"
+              placeholder="Votre mot de passe"
+              formControlName="password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="passwordConfirmed">Confirmer votre mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              name="passwordConfirmed"
+              id="register-passwordConfirmed"
+              placeholder="Confirmer votre mot de passe"
+              formControlName="passwordConfirmed"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Url de votre photo de profil</label>
+            <input
+              type="url"
+              class="form-control"
+              name="profilePicture"
+              id="register-profilePicture"
+              placeholder="Url de l'image"
+              formControlName="profilePicture"
+            />
+          </div>
+          <button type="submit" class="btn btn-outline-primary">
+            S'inscrire
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
