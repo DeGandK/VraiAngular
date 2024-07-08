@@ -34,10 +34,17 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="#">Liste des utilisateurs</a>
+              <a class="dropdown-item" routerLink="/listuser">
+                Liste des utilisateurs
+              </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Historique des quizzes</a>
+              <a
+                class="dropdown-item"
+                href="#"
+                (click)="navigateToListQuizzes()"
+                >Historique des quizzes</a
+              >
             </li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider" /></li>
@@ -49,10 +56,12 @@
         <li class="nav-item">
           <app-register></app-register>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <app-loginuser></app-loginuser>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
 </nav>
+<!-- <p>Coucou</p>
+<a routerLink="listuser">test</a> -->
