@@ -9,7 +9,7 @@ import { QuizService } from '../../../services/quiz.service';
 })
 export class CreatequizComponent implements OnInit {
   completeQuiz!: CompleteQuiz;
-
+  isVisible!: boolean;
   constructor(private quiService: QuizService) {}
 
   ngOnInit(): void {
@@ -19,6 +19,10 @@ export class CreatequizComponent implements OnInit {
   loadCompleteQuiz(id: number): void {
     this.quiService.getCompleteQuiz(id).subscribe((data) => {
       this.completeQuiz = data;
+      this.completeQuiz.monQuestionnaire.forEach((el) => {
+        el.randomAnswer = this.getShuffledAnswers(el);
+      });
+      this.isVisible = true;
     });
   }
 

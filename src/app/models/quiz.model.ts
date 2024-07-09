@@ -14,6 +14,7 @@ export interface Question {
   fausseReponseB: string;
   fausseReponseC: string;
   image: string;
+  randomAnswer: string[];
 }
 
 export interface CategoryQuestion {

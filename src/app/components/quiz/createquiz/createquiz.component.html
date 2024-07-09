@@ -1,4 +1,4 @@
-<div *ngIf="completeQuiz">
+<div *ngIf="completeQuiz && isVisible">
   <h1>Quiz: {{ completeQuiz.id }}</h1>
   <p>Créé le: {{ completeQuiz.createAt | date }}</p>
   <p>Hôte: {{ completeQuiz.hostUserId }}</p>
@@ -12,7 +12,7 @@
 
       <h3>Réponses</h3>
       <ul>
-        <li *ngFor="let answer of getShuffledAnswers(question)">
+        <li *ngFor="let answer of question.randomAnswer">
           {{ answer }}
         </li>
       </ul>
