@@ -1,0 +1,28 @@
+<div *ngIf="completeQuiz">
+  <h1>Quiz: {{ completeQuiz.id }}</h1>
+  <p>Créé le: {{ completeQuiz.createAt | date }}</p>
+  <p>Hôte: {{ completeQuiz.hostUserId }}</p>
+  <p>Actif: {{ completeQuiz.isActive }}</p>
+
+  <h2>Questions</h2>
+  <ul>
+    <li *ngFor="let question of completeQuiz.monQuestionnaire">
+      <p><strong>Question:</strong> {{ question.questionText }}</p>
+      <p><strong>Catégorie:</strong> {{ question.categoryId }}</p>
+
+      <h3>Réponses</h3>
+      <ul>
+        <li *ngFor="let answer of getShuffledAnswers(question)">
+          {{ answer }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Catégories</h2>
+  <ul>
+    <li *ngFor="let category of completeQuiz.categoryQuestionnaire">
+      {{ category.categoryName }}
+    </li>
+  </ul>
+</div>

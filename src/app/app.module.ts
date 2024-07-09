@@ -12,6 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CreatequizComponent } from './components/quiz/createquiz/createquiz.component';
+import { ListquizComponent } from './components/quiz/listquiz/listquiz.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     UpdateuserComponent,
     HomeComponent,
     NavbarComponent,
+    CreatequizComponent,
+    ListquizComponent,
   ],
   imports: [
     BrowserModule,
