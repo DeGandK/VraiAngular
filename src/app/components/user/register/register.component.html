@@ -1,5 +1,6 @@
 @if(isConnected == false){
 <app-loginuser></app-loginuser>
 } @else {
-<button (click)="logout()">Déconnexion</button>
+<h4>Bienvenue {{ currentUser.username }}</h4>
+<button (click)="logout()" class="logout-button">Déconnexion</button>
 }

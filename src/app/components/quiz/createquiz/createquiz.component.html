@@ -1,116 +1,158 @@
-<div *ngIf="completeQuiz && isVisible">
-  <h1>Quiz: {{ completeQuiz.id }}</h1>
-  <p>Créé le: {{ completeQuiz.createAt | date : "dd/MM/yyyy HH:mm" }}</p>
-  <p>Hôte: {{ completeQuiz.hostUserId }}</p>
-  <p>Vos points : {{ score }}</p>
+<div *ngIf="completeQuiz && isVisible" class="container">
+  <div class="row">
+    <!-- Colonne principale pour le quiz -->
+    <div class="col-md-8">
+      <h1>Quiz: {{ completeQuiz.id }}</h1>
+      <p>Créé le: {{ completeQuiz.createAt | date : "dd/MM/yyyy HH:mm" }}</p>
+      <p>Hôte: {{ completeQuiz.hostUserId }}</p>
+      <p>Vos points : {{ score }}</p>
 
-  <!-- Afficher la question actuelle -->
-  <div
-    *ngIf="
-      categoriesSelected && currentQuestionIndex < filteredQuestions().length
-    "
-    class="quiz-content"
-  >
-    <h2>Question {{ currentQuestionIndex + 1 }}</h2>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Question</h5>
-        <p class="card-text">
-          {{ filteredQuestions()[currentQuestionIndex].questionText }}
-        </p>
-
-        <!-- Champ pour entrer la réponse -->
-        <div class="mb-2">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="userAnswer"
-            placeholder="Entrez votre réponse"
-          />
+      <!-- Filtrage par catégorie -->
+      <div class="category-filter mb-4">
+        <h2>Exclure une catégorie de questions</h2>
+        <div class="category-buttons">
           <button
-            class="btn btn-outline-primary ml-2"
-            (click)="confirmAnswer()"
+            *ngFor="let category of completeQuiz.categoryQuestionnaire"
+            class="btn btn-outline-primary mr-2 mb-2 btn-category"
+            [class.active]="category.id === selectedCategory"
+            (click)="applyCategoryFilter(category.id)"
           >
-            Confirmer
+            {{ category.categoryName }}
           </button>
         </div>
 
-        <!-- Bouton pour afficher les réponses -->
-        <button class="btn btn-outline-primary mb-2" (click)="showAnswers()">
-          Afficher les réponses
-        </button>
+        <div class="reset-button">
+          <button
+            class="btn btn-outline-primary btn-reset"
+            (click)="resetCategoryFilter()"
+          >
+            Lancer le quizz sans filtre
+          </button>
+        </div>
+      </div>
 
-        <!-- Affichage des réponses si l'utilisateur choisit -->
-        <div *ngIf="showingAnswers">
-          <h5 class="card-title mt-3">Réponses possibles</h5>
-          <div class="btn-group" role="group">
-            <ng-container
-              *ngFor="
-                let answer of getShuffledAnswers(
-                  filteredQuestions()[currentQuestionIndex]
-                );
-                let i = index
-              "
-            >
+      <!-- Afficher la question actuelle -->
+      <div
+        *ngIf="
+          categoriesSelected &&
+          currentQuestionIndex < filteredQuestions().length
+        "
+        class="quiz-content"
+      >
+        <h2>Question {{ currentQuestionIndex + 1 }}</h2>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Question</h5>
+            <p class="card-text">
+              {{ filteredQuestions()[currentQuestionIndex].questionText }}
+            </p>
+
+            <!-- Champ pour entrer la réponse -->
+            <div class="mb-2">
               <input
-                type="radio"
-                class="btn-check"
-                [id]="
-                  'btncheck' +
-                  filteredQuestions()[currentQuestionIndex].id +
-                  '-' +
-                  i
-                "
-                autocomplete="off"
-                (change)="submitAnswer(answer)"
+                type="text"
+                class="form-control"
+                [(ngModel)]="userAnswer"
+                placeholder="Entrez votre réponse"
               />
-              <label
-                class="btn btn-outline-primary"
-                [for]="
-                  'btncheck' +
-                  filteredQuestions()[currentQuestionIndex].id +
-                  '-' +
-                  i
-                "
+              <button
+                class="btn btn-outline-primary ml-2"
+                (click)="confirmAnswer()"
               >
-                {{ answer }}
-              </label>
-            </ng-container>
+                Confirmer
+              </button>
+            </div>
+
+            <!-- Bouton pour afficher les réponses -->
+            <button
+              class="btn btn-outline-primary mb-2"
+              (click)="showAnswers()"
+            >
+              Afficher les réponses
+            </button>
+
+            <!-- Affichage des réponses si l'utilisateur choisit -->
+            <div *ngIf="showingAnswers">
+              <h5 class="card-title mt-3">Réponses possibles</h5>
+              <div class="btn-group" role="group">
+                <ng-container
+                  *ngFor="
+                    let answer of getShuffledAnswers(
+                      filteredQuestions()[currentQuestionIndex]
+                    );
+                    let i = index
+                  "
+                >
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    [id]="
+                      'btncheck' +
+                      filteredQuestions()[currentQuestionIndex].id +
+                      '-' +
+                      i
+                    "
+                    autocomplete="off"
+                    (change)="submitAnswer(answer)"
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    [for]="
+                      'btncheck' +
+                      filteredQuestions()[currentQuestionIndex].id +
+                      '-' +
+                      i
+                    "
+                  >
+                    {{ answer }}
+                  </label>
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- Bouton pour passer à la question suivante -->
+            <button class="btn btn-primary mt-3" (click)="nextQuestion()">
+              Passer la question
+            </button>
           </div>
         </div>
+      </div>
 
-        <!-- Bouton pour passer à la question suivante -->
-        <button class="btn btn-primary mt-3" (click)="nextQuestion()">
-          Passer la question
-        </button>
+      <!-- Afficher un message de fin si toutes les questions sont répondues -->
+      <div *ngIf="currentQuestionIndex >= filteredQuestions().length">
+        <h2>Quiz terminé !</h2>
+        <p>Merci d'avoir complété le quiz.</p>
+        <p>Votre score: {{ score }}</p>
       </div>
     </div>
-  </div>
 
-  <!-- Afficher un message de fin si toutes les questions sont répondues -->
-  <div *ngIf="currentQuestionIndex >= filteredQuestions().length">
-    <h2>Quiz terminé !</h2>
-    <p>Merci d'avoir complété le quiz.</p>
-    <p>Votre score: {{ score }}</p>
-  </div>
-
-  <!-- Filtrage par catégorie -->
-  <div class="category-filter mt-4">
-    <h2>Exclure une catégorie de questions</h2>
-    <div class="category-buttons">
-      <button
-        *ngFor="let category of completeQuiz.categoryQuestionnaire"
-        class="btn btn-outline-primary mr-2 mb-2"
-        (click)="applyCategoryFilter(category.id)"
-        [class.btn-primary]="category.id === selectedCategory"
-      >
-        {{ category.categoryName }}
-      </button>
-    </div>
-    <div class="reset-button">
-      <button class="btn btn-outline-primary" (click)="resetCategoryFilter()">
-        Lancer le quizz sans filtre
-      </button>
+    <!-- Colonne pour les règles -->
+    <div class="col-md-4">
+      <div class="card mb-4" style="max-width: 18rem">
+        <img
+          src="https://lapisciacaise.ville-poissy.fr/images/articles/reglement.jpg"
+          class="card-img-top"
+          alt="Règlement"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><strong>Règles</strong></h5>
+          <p class="card-text">Quelques règles :</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item good-answer">
+              Une bonne réponse entrée sans les propositions + 2 points
+            </li>
+            <li class="list-group-item selected-answer">
+              Une bonne réponse sélectionnée parmi les propositions + 1 point
+            </li>
+            <li class="list-group-item wrong-answer">
+              Une mauvaise réponse entrée ou sélectionnée -1 point
+            </li>
+            <li class="list-group-item passed-question">
+              Une question passée vaut 0 point
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

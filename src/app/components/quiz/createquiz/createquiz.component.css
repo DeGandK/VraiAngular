@@ -19,3 +19,49 @@
 .quiz-content {
   margin-top: 20px;
 }
+
+.category-buttons .btn-category {
+  background-color: #00ff0d; /* Couleur de fond par défaut */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
+}
+
+.category-buttons .btn-category:hover {
+  background-color: #127b06; /* Couleur de fond en hover */
+  border-color: #00ff00; /* Bordure en hover */
+}
+
+.category-buttons .btn-category.active {
+  background-color: #28a745; /* Couleur de fond pour la catégorie active */
+  border-color: #28a745; /* Bordure pour la catégorie active */
+}
+
+.reset-button .btn-reset {
+  background-color: #000000; /* Couleur de fond personnalisée */
+  color: rgb(13, 255, 0); /* Couleur du texte */
+  border: none; /* Pas de bordure */
+}
+
+.reset-button .btn-reset:hover {
+  background-color: #4f4881; /* Couleur de fond en hover */
+}
+
+.good-answer {
+  background-color: #d4edda; /* Couleur de fond vert clair pour une bonne réponse */
+  color: #155724; /* Couleur du texte vert foncé */
+}
+
+.selected-answer {
+  background-color: #cce5ff; /* Couleur de fond bleu clair pour une réponse sélectionnée */
+  color: #004085; /* Couleur du texte bleu foncé */
+}
+
+.wrong-answer {
+  background-color: #f8d7da; /* Couleur de fond rouge clair pour une mauvaise réponse */
+  color: #721c24; /* Couleur du texte rouge foncé */
+}
+
+.passed-question {
+  background-color: #fff3cd; /* Couleur de fond jaune clair pour une question passée */
+  color: #856404; /* Couleur du texte jaune foncé */
+}

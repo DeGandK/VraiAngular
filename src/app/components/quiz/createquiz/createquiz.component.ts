@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompleteQuiz, Question } from '../../../models/quiz.model';
 import { QuizService } from '../../../services/quiz.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-createquiz',
@@ -16,6 +17,7 @@ export class CreatequizComponent implements OnInit {
   categoriesSelected: boolean = false;
   userAnswer: string = '';
   showingAnswers: boolean = false;
+  currentUser!: User;
 
   constructor(private quizService: QuizService) {}
 
