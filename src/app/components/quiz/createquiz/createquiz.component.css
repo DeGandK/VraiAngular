@@ -1,0 +1,21 @@
+.category-filter {
+  margin-bottom: 20px;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-buttons button {
+  margin-bottom: 10px;
+}
+
+.reset-button {
+  margin-top: 10px;
+}
+
+.quiz-content {
+  margin-top: 20px;
+}

@@ -1,30 +1,116 @@
 <div *ngIf="completeQuiz && isVisible">
   <h1>Quiz: {{ completeQuiz.id }}</h1>
-  <p>Créé le: {{ completeQuiz.createAt | date }}</p>
+  <p>Créé le: {{ completeQuiz.createAt | date : "dd/MM/yyyy HH:mm" }}</p>
   <p>Hôte: {{ completeQuiz.hostUserId }}</p>
-  <p>Actif: {{ completeQuiz.isActive }}</p>
+  <p>Vos points : {{ score }}</p>
 
-  <h2>Questions</h2>
-  <ul>
-    <li *ngFor="let question of completeQuiz.monQuestionnaire">
-      <p><strong>Question:</strong> {{ question.questionText }}</p>
-      <p><strong>Catégorie:</strong> {{ question.categoryId }}</p>
+  <!-- Afficher la question actuelle -->
+  <div
+    *ngIf="
+      categoriesSelected && currentQuestionIndex < filteredQuestions().length
+    "
+    class="quiz-content"
+  >
+    <h2>Question {{ currentQuestionIndex + 1 }}</h2>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Question</h5>
+        <p class="card-text">
+          {{ filteredQuestions()[currentQuestionIndex].questionText }}
+        </p>
 
-      <h3>Réponses</h3>
-      <ul>
-        <li *ngFor="let answer of question.randomAnswer">
-          {{ answer }}
-        </li>
-      </ul>
-    </li>
-  </ul>
+        <!-- Champ pour entrer la réponse -->
+        <div class="mb-2">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="userAnswer"
+            placeholder="Entrez votre réponse"
+          />
+          <button
+            class="btn btn-outline-primary ml-2"
+            (click)="confirmAnswer()"
+          >
+            Confirmer
+          </button>
+        </div>
 
-  <h2>Catégories</h2>
-  <ul>
-    <li *ngFor="let category of completeQuiz.categoryQuestionnaire">
-      {{ category.categoryName }}
-    </li>
-  </ul>
+        <!-- Bouton pour afficher les réponses -->
+        <button class="btn btn-outline-primary mb-2" (click)="showAnswers()">
+          Afficher les réponses
+        </button>
+
+        <!-- Affichage des réponses si l'utilisateur choisit -->
+        <div *ngIf="showingAnswers">
+          <h5 class="card-title mt-3">Réponses possibles</h5>
+          <div class="btn-group" role="group">
+            <ng-container
+              *ngFor="
+                let answer of getShuffledAnswers(
+                  filteredQuestions()[currentQuestionIndex]
+                );
+                let i = index
+              "
+            >
+              <input
+                type="radio"
+                class="btn-check"
+                [id]="
+                  'btncheck' +
+                  filteredQuestions()[currentQuestionIndex].id +
+                  '-' +
+                  i
+                "
+                autocomplete="off"
+                (change)="submitAnswer(answer)"
+              />
+              <label
+                class="btn btn-outline-primary"
+                [for]="
+                  'btncheck' +
+                  filteredQuestions()[currentQuestionIndex].id +
+                  '-' +
+                  i
+                "
+              >
+                {{ answer }}
+              </label>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Bouton pour passer à la question suivante -->
+        <button class="btn btn-primary mt-3" (click)="nextQuestion()">
+          Passer la question
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Afficher un message de fin si toutes les questions sont répondues -->
+  <div *ngIf="currentQuestionIndex >= filteredQuestions().length">
+    <h2>Quiz terminé !</h2>
+    <p>Merci d'avoir complété le quiz.</p>
+    <p>Votre score: {{ score }}</p>
+  </div>
+
+  <!-- Filtrage par catégorie -->
+  <div class="category-filter mt-4">
+    <h2>Exclure une catégorie de questions</h2>
+    <div class="category-buttons">
+      <button
+        *ngFor="let category of completeQuiz.categoryQuestionnaire"
+        class="btn btn-outline-primary mr-2 mb-2"
+        (click)="applyCategoryFilter(category.id)"
+        [class.btn-primary]="category.id === selectedCategory"
+      >
+        {{ category.categoryName }}
+      </button>
+    </div>
+    <div class="reset-button">
+      <button class="btn btn-outline-primary" (click)="resetCategoryFilter()">
+        Lancer le quizz sans filtre
+      </button>
+    </div>
+  </div>
 </div>
-
-<!-- commentaire -->
