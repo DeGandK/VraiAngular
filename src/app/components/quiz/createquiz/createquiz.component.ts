@@ -22,7 +22,7 @@ export class CreatequizComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
-    this.loadCompleteQuiz(1); // Charger le quiz avec l'ID approprié (à adapter selon votre logique)
+    this.loadCompleteQuiz(1);
   }
 
   loadCompleteQuiz(id: number): void {
@@ -120,7 +120,6 @@ export class CreatequizComponent implements OnInit {
 
     // Mélanger les questions de manière aléatoire
     filteredQuestions = this.shuffleArray(filteredQuestions);
-
     return filteredQuestions;
   }
 }
