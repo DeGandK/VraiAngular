@@ -153,3 +153,20 @@ h2 {
   color: rgb(0, 0, 0);
   border: 1px solid;
 }
+
+.question-card {
+  height: 100%; /* Pour que la carte prenne toute la hauteur disponible */
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-possible {
+  margin-right: auto; /* Aligner à gauche */
+}
+
+.btn-passer {
+  margin-left: auto; /* Aligner à droite */
+}

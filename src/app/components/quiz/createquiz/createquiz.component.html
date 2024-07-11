@@ -40,7 +40,7 @@
         class="quiz-content"
       >
         <h2>Question {{ currentQuestionIndex + 1 }}</h2>
-        <div class="card mb-3">
+        <div class="card mb-3 question-card">
           <div class="card-body">
             <p class="card-text">
               {{ filteredQuestions()[currentQuestionIndex].questionText }}
@@ -61,14 +61,6 @@
                 Confirmer
               </button>
             </div>
-
-            <!-- Bouton pour afficher les réponses -->
-            <button
-              class="btn btn-outline-primary mb-2 btn-possible"
-              (click)="showAnswers()"
-            >
-              Afficher les réponses possibles
-            </button>
 
             <!-- Affichage des réponses si l'utilisateur choisit -->
             <div *ngIf="showingAnswers">
@@ -108,12 +100,19 @@
                 </ng-container>
               </div>
             </div>
+          </div>
+
+          <div class="card-footer d-flex justify-content-between">
+            <!-- Bouton pour afficher les réponses -->
+            <button
+              class="btn btn-outline-primary btn-possible"
+              (click)="showAnswers()"
+            >
+              Afficher les réponses possibles
+            </button>
 
             <!-- Bouton pour passer à la question suivante -->
-            <button
-              class="btn btn-primary mt-3 btn-passer"
-              (click)="nextQuestion()"
-            >
+            <button class="btn btn-primary btn-passer" (click)="nextQuestion()">
               Passer la question
             </button>
           </div>
