@@ -65,3 +65,23 @@
   background-color: #fff3cd; /* Couleur de fond jaune clair pour une question passée */
   color: #856404; /* Couleur du texte jaune foncé */
 }
+.btn-passer {
+  background-color: #00ff0d; /* Couleur de fond par défaut */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
+}
+.btn-possible {
+  background-color: #00ff0d; /* Couleur de fond par défaut */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
+}
+.btn-confirmer {
+  background-color: #00ff0d; /* Couleur de fond par défaut */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  border: 1px solid #000000;
+}
+.btn-possible-answers {
+  background-color: #00ff0d; /* Couleur de fond par défaut */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  border: 1px solid #000000;
+}

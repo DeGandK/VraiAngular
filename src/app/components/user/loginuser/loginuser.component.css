@@ -1,0 +1,35 @@
+/* Styles personnalisés pour les boutons */
+.btn-login {
+  background-color: transparent; /* Couleur de fond par défaut */
+  border-color: #000000; /* Couleur de la bordure */
+  color: rgb(34, 255, 0); /* Couleur du texte */
+}
+
+.btn-login:hover {
+  background-color: #00ff0d; /* Couleur de fond au survol */
+  color: #000000;
+  border-color: #00ff0d; /* Couleur de la bordure au survol */
+}
+
+.btn-register {
+  background-color: transparent; /* Couleur de fond par défaut */
+  border-color: #000000; /* Couleur de la bordure */
+  color: rgb(34, 255, 0); /* Couleur du texte */
+}
+
+.btn-register:hover {
+  background-color: #00ff0d; /* Couleur de fond au survol */
+  color: #000000;
+  border-color: #00ff0d; /* Couleur de la bordure au survol */
+}
+
+.btn-register-submit {
+  background-color: #ffc107; /* Couleur de fond par défaut */
+  border-color: #ffc107; /* Couleur de la bordure */
+  color: black; /* Couleur du texte */
+}
+
+.btn-register-submit:hover {
+  background-color: #ffb300; /* Couleur de fond au survol */
+  border-color: #ffb300; /* Couleur de la bordure au survol */
+}

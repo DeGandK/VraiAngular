@@ -7,3 +7,14 @@
 .card {
   margin-bottom: 1.5rem;
 }
+.green-text {
+  color: #0ef40e;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.carousel-image {
+  height: 400px; /* Définissez une hauteur fixe pour les images */
+  object-fit: cover; /* Assurez-vous que les images couvrent la totalité de l'espace sans déformer */
+  width: 100%; /* Assurez-vous que les images prennent toute la largeur */
+}
