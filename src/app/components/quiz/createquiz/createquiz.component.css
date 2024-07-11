@@ -1,87 +1,155 @@
-.category-filter {
+/* Card Styling */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+/* Buttons Styling */
+.btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary {
+  border: 1px solid #000000;
+  color: #000000;
+  background-color: #00ff0d;
+}
+
+.btn-outline-primary:hover {
+  background-color: #127b06;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-possible-answers {
+  background-color: #00ff0d;
+  color: rgb(0, 0, 0);
+  border: 1px solid #000000;
+}
+
+.btn-possible-answers:hover {
+  background-color: #127b06;
+}
+
+/* Inputs Styling */
+input.form-control {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/* Spacing and Layout */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.row {
   margin-bottom: 20px;
 }
 
-.category-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.category-buttons button {
-  margin-bottom: 10px;
-}
-
-.reset-button {
-  margin-top: 10px;
+h1,
+h2 {
+  margin-bottom: 20px;
 }
 
 .quiz-content {
   margin-top: 20px;
 }
 
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.mb-3 {
+  margin-bottom: 30px;
+}
+
+.mt-3 {
+  margin-top: 30px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1.1rem;
+}
+
+/* Specific Button Colors */
 .category-buttons .btn-category {
-  background-color: #00ff0d; /* Couleur de fond par défaut */
-  color: rgb(0, 0, 0); /* Couleur du texte */
-  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
+  background-color: #00ff0d;
+  color: rgb(0, 0, 0);
+  border: 1px solid #000000;
 }
 
 .category-buttons .btn-category:hover {
-  background-color: #127b06; /* Couleur de fond en hover */
-  border-color: #00ff00; /* Bordure en hover */
+  background-color: #127b06;
+  border-color: #00ff00;
 }
 
 .category-buttons .btn-category.active {
-  background-color: #28a745; /* Couleur de fond pour la catégorie active */
-  border-color: #28a745; /* Bordure pour la catégorie active */
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 .reset-button .btn-reset {
-  background-color: #000000; /* Couleur de fond personnalisée */
-  color: rgb(13, 255, 0); /* Couleur du texte */
-  border: none; /* Pas de bordure */
+  background-color: #000000;
+  color: rgb(13, 255, 0);
+  border: none;
 }
 
 .reset-button .btn-reset:hover {
-  background-color: #4f4881; /* Couleur de fond en hover */
+  background-color: #4f4881;
 }
 
 .good-answer {
-  background-color: #d4edda; /* Couleur de fond vert clair pour une bonne réponse */
-  color: #155724; /* Couleur du texte vert foncé */
+  background-color: #d4edda;
+  color: #155724;
 }
 
 .selected-answer {
-  background-color: #cce5ff; /* Couleur de fond bleu clair pour une réponse sélectionnée */
-  color: #004085; /* Couleur du texte bleu foncé */
+  background-color: #cce5ff;
+  color: #004085;
 }
 
 .wrong-answer {
-  background-color: #f8d7da; /* Couleur de fond rouge clair pour une mauvaise réponse */
-  color: #721c24; /* Couleur du texte rouge foncé */
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 .passed-question {
-  background-color: #fff3cd; /* Couleur de fond jaune clair pour une question passée */
-  color: #856404; /* Couleur du texte jaune foncé */
+  background-color: #fff3cd;
+  color: #856404;
 }
+
 .btn-passer {
-  background-color: #00ff0d; /* Couleur de fond par défaut */
-  color: rgb(0, 0, 0); /* Couleur du texte */
-  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
-}
-.btn-possible {
-  background-color: #00ff0d; /* Couleur de fond par défaut */
-  color: rgb(0, 0, 0); /* Couleur du texte */
-  border: 1px solid #000000; /* Bordure de la même couleur que le fond */
-}
-.btn-confirmer {
-  background-color: #00ff0d; /* Couleur de fond par défaut */
-  color: rgb(0, 0, 0); /* Couleur du texte */
-  border: 1px solid #000000;
-}
-.btn-possible-answers {
-  background-color: #00ff0d; /* Couleur de fond par défaut */
-  color: rgb(0, 0, 0); /* Couleur du texte */
-  border: 1px solid #000000;
+  background-color: #00ff0d;
+  color: rgb(0, 0, 0);
+  border: 1px solid;
 }

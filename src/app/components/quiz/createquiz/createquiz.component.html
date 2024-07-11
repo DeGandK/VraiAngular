@@ -39,9 +39,9 @@
         "
         class="quiz-content"
       >
-        <h2>Question {{ currentQuestionIndex + 1 }}</h2>
-        <div class="card mb-3">
-          <div class="card-body">
+        <div class="card mb-3 position-relative">
+          <div class="card-body" style="min-height: 400px">
+            <h2>Question {{ currentQuestionIndex + 1 }}</h2>
             <p class="card-text">
               {{ filteredQuestions()[currentQuestionIndex].questionText }}
             </p>
@@ -61,15 +61,6 @@
                 Confirmer
               </button>
             </div>
-
-            <!-- Bouton pour afficher les réponses -->
-            <button
-              class="btn btn-outline-primary mb-2 btn-possible"
-              (click)="showAnswers()"
-            >
-              Afficher les réponses possibles
-            </button>
-
             <!-- Affichage des réponses si l'utilisateur choisit -->
             <div *ngIf="showingAnswers">
               <h5 class="card-title mt-3">Réponses possibles</h5>
@@ -109,14 +100,61 @@
               </div>
             </div>
 
-            <!-- Bouton pour passer à la question suivante -->
+            <!-- Bouton pour afficher les réponses -->
             <button
-              class="btn btn-primary mt-3 btn-passer"
-              (click)="nextQuestion()"
+              class="btn btn-outline-primary mb-2 btn-possible"
+              style="position: absolute; bottom: 10px; left: 10px"
+              (click)="showAnswers()"
             >
-              Passer la question
+              Afficher les réponses possibles
             </button>
+
+            <!-- Bouton pour passer à la question suivante -->
+            <div class="btn-pass-container">
+              <button
+                class="btn btn-primary mt-3 btn-passer position-absolute"
+                style="bottom: 10px; right: 10px"
+                (click)="nextQuestion()"
+              >
+                Passer la question
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Afficher un message de fin si toutes les questions sont répondues -->
+      <div *ngIf="currentQuestionIndex >= filteredQuestions().length">
+        <h2>Quiz terminé !</h2>
+        <p>Merci d'avoir complété le quiz.</p>
+        <p>Votre score: {{ score }}</p>
+      </div>
+    </div>
+
+    <!-- Colonne pour les règles -->
+    <div class="col-md-4">
+      <div class="card mb-4" style="max-width: 18rem">
+        <img
+          src="https://lapisciacaise.ville-poissy.fr/images/articles/reglement.jpg"
+          class="card-img-top"
+          alt="Règlement"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><strong>Règles</strong></h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item good-answer">
+              Une bonne réponse entrée sans les propositions + 2 points
+            </li>
+            <li class="list-group-item selected-answer">
+              Une bonne réponse sélectionnée parmi les propositions + 1 point
+            </li>
+            <li class="list-group-item wrong-answer">
+              Une mauvaise réponse entrée ou sélectionnée -1 point
+            </li>
+            <li class="list-group-item passed-question">
+              Une question passée vaut 0 point
+            </li>
+          </ul>
         </div>
       </div>
     </div>

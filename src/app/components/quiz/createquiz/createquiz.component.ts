@@ -98,7 +98,7 @@ export class CreatequizComponent implements OnInit {
   resetCategoryFilter(): void {
     this.selectedCategory = null;
     this.currentQuestionIndex = 0;
-    this.categoriesSelected = false;
+    this.categoriesSelected = true;
   }
 
   isQuestionInSelectedCategory(question: Question): boolean {
@@ -112,8 +112,16 @@ export class CreatequizComponent implements OnInit {
     if (!this.completeQuiz || !this.completeQuiz.monQuestionnaire) {
       return [];
     }
-    return this.completeQuiz.monQuestionnaire.filter((question) =>
-      this.isQuestionInSelectedCategory(question)
+
+    // Filtrer les questions par catégorie si une catégorie est sélectionnée
+    let filteredQuestions = this.completeQuiz.monQuestionnaire.filter(
+      (question) => this.isQuestionInSelectedCategory(question)
     );
+
+    // Mélanger les questions de manière aléatoire
+    filteredQuestions = this.shuffleArray(filteredQuestions);
+
+    return filteredQuestions;
   }
 }
+// commentaire
