@@ -22,7 +22,7 @@ export class CreatequizComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
-    this.loadCompleteQuiz(1);
+    this.loadCompleteQuiz(1); // Charger le quiz avec l'ID approprié (à adapter selon votre logique)
   }
 
   loadCompleteQuiz(id: number): void {
@@ -98,7 +98,7 @@ export class CreatequizComponent implements OnInit {
   resetCategoryFilter(): void {
     this.selectedCategory = null;
     this.currentQuestionIndex = 0;
-    this.categoriesSelected = true;
+    this.categoriesSelected = false;
   }
 
   isQuestionInSelectedCategory(question: Question): boolean {
@@ -112,15 +112,8 @@ export class CreatequizComponent implements OnInit {
     if (!this.completeQuiz || !this.completeQuiz.monQuestionnaire) {
       return [];
     }
-
-    // Filtrer les questions par catégorie si une catégorie est sélectionnée
-    let filteredQuestions = this.completeQuiz.monQuestionnaire.filter(
-      (question) => this.isQuestionInSelectedCategory(question)
+    return this.completeQuiz.monQuestionnaire.filter((question) =>
+      this.isQuestionInSelectedCategory(question)
     );
-
-    // Mélanger les questions de manière aléatoire
-    filteredQuestions = this.shuffleArray(filteredQuestions);
-    return filteredQuestions;
   }
 }
-// commentaire
