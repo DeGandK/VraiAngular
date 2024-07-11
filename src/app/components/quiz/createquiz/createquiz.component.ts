@@ -18,6 +18,7 @@ export class CreatequizComponent implements OnInit {
   userAnswer: string = '';
   showingAnswers: boolean = false;
   currentUser!: User;
+  shuffledQuestions: Question[] = [];
 
   constructor(private quizService: QuizService) {}
 
@@ -28,14 +29,23 @@ export class CreatequizComponent implements OnInit {
   loadCompleteQuiz(id: number): void {
     this.quizService.getCompleteQuiz(id).subscribe((data) => {
       this.completeQuiz = data;
-      // Préparer les réponses aléatoires pour chaque question
+      // Mélanger les questions et préparer les réponses aléatoires pour chaque question
       if (this.completeQuiz && this.completeQuiz.monQuestionnaire) {
-        this.completeQuiz.monQuestionnaire.forEach((question) => {
-          question.randomAnswer = this.getShuffledAnswers(question);
-        });
+        this.shuffleQuestions();
+        this.isVisible = true; // Afficher le quiz une fois chargé
       }
-      this.isVisible = true; // Afficher le quiz une fois chargé
     });
+  }
+
+  shuffleQuestions(): void {
+    if (this.completeQuiz && this.completeQuiz.monQuestionnaire) {
+      this.shuffledQuestions = this.shuffleArray([
+        ...this.completeQuiz.monQuestionnaire,
+      ]);
+      this.shuffledQuestions.forEach((question) => {
+        question.randomAnswer = this.getShuffledAnswers(question);
+      });
+    }
   }
 
   getShuffledAnswers(question: Question): string[] {
@@ -98,7 +108,7 @@ export class CreatequizComponent implements OnInit {
   resetCategoryFilter(): void {
     this.selectedCategory = null;
     this.currentQuestionIndex = 0;
-    this.categoriesSelected = false;
+    this.categoriesSelected = true;
   }
 
   isQuestionInSelectedCategory(question: Question): boolean {
@@ -109,10 +119,10 @@ export class CreatequizComponent implements OnInit {
   }
 
   filteredQuestions(): Question[] {
-    if (!this.completeQuiz || !this.completeQuiz.monQuestionnaire) {
+    if (!this.completeQuiz || !this.shuffledQuestions) {
       return [];
     }
-    return this.completeQuiz.monQuestionnaire.filter((question) =>
+    return this.shuffledQuestions.filter((question) =>
       this.isQuestionInSelectedCategory(question)
     );
   }
